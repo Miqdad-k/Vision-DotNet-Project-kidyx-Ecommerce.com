@@ -1,0 +1,30 @@
+﻿@model IEnumerable<kidyx.com.Models.fsection>
+
+
+
+<!-- Hero Section Begin -->
+<section class="hero-section">
+    <div class="hero-items owl-carousel">
+        @foreach (var item in Model)
+        {
+            <div class="single-hero-items set-bg" data-setbg="@Url.Content(item.picture)">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-5" style="margin-left:5% !important">
+                            <span>@item.cat</span>
+                            <h1>@item.title</h1>
+                            <p>
+                                @item.description
+                            </p>
+                            <a href="@Url.Content(item.tcontrol)" class="primary-btn">Shop Now</a>
+                        </div>
+                    </div>
+                    <div class="off-card">
+                        <h2>@item.tag <span>@item.tnum</span></h2>
+                    </div>
+                </div>
+            </div>
+        }
+        </div>
+</section>
+<!-- Hero Section End -->

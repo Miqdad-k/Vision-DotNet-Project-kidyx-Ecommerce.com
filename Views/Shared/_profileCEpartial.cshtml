@@ -1,0 +1,20 @@
+﻿@model kidyx.com.Models.UserProfile_details
+@using Microsoft.AspNet.Identity
+
+
+@if (ViewBag.roles == User.Identity.GetUserId())
+{
+    <a class="dropdown-item" href="@Url.Action("Profiledetails_Edit","Home", new { id = User.Identity.GetUserId() })">
+        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+        Profile
+    </a>
+}
+else
+{
+    <a class="dropdown-item" href="@Url.Action("Profiledetails_Create","Home", new { id = User.Identity.GetUserId() })">
+        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+        Profile
+    </a>
+}
+
+

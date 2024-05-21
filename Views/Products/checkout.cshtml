@@ -1,0 +1,144 @@
+﻿@model kidyx.com.Models.ordermanagement
+@using kidyx.com.Models
+@{
+    ViewBag.Title = "checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Breadcrumb Section Begin -->
+<div class="breacrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-text product-more">
+                    <a href="./index.html"><i class="fa fa-home"></i> Home</a>
+                    <a href="./shop.html">Shop</a>
+                    <span>Check Out</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb Section Begin -->
+<!-- Shopping Cart Section Begin -->
+<section class="checkout-section spad">
+    <div class="container">
+        <form action="/Products/checkout" method="POST" class="checkout-form">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="checkout-content">
+                        <a href="#" class="content-btn">Click Here To Login</a>
+                    </div>
+                    <h4>Biiling Details</h4>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label for="fir">First Name<span>*</span></label>
+                            @Html.EditorFor(model => model.user_pname, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.user_pname, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="last">Last Name<span>*</span></label>
+                            @Html.EditorFor(model => model.user_fname, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.user_fname, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-lg-12">
+                            <label for="street">Street Address<span>*</span></label>
+                            @Html.EditorFor(model => model.address1, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.address1, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-lg-12">
+                            <label for="zip">Postcode / ZIP (optional)</label>
+                            @Html.EditorFor(model => model.zipcode, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.zipcode, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-lg-6">
+                            <label for="email">Email Address<span>*</span></label>
+                            @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="phone">Phone<span>*</span></label>
+                            @Html.EditorFor(model => model.phoneno, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.phoneno, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="create-item">
+                                <label for="acc-create">
+                                    Create an account?
+                                    <input type="checkbox" id="acc-create">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="checkout-content">
+                        <input type="text" placeholder="Enter Your Coupon Code">
+                    </div>
+                    <div class="place-order">
+                        <h4>Your Order</h4>
+                        <div class="order-total">
+                            <ul class="order-table">
+                                <li>Product <span>Total</span></li>
+                                @{
+                                    int total = 0;
+                                }
+                                @if (Session["cart"] != null)
+                                {
+                                    foreach (cart item in (List<cart>)Session["cart"])
+                                    {
+                                        <li class="fw-normal">@item.productname x @item.qty <span>@item.productprice</span></li>
+                                        total = (item.productprice * item.qty) + total;
+
+                                    }
+                                }
+                                <li class="total-price">Total <span>@total.00</span></li>
+                            </ul>
+                            <div class="payment-check">
+                                <div class="pc-item">
+                                    <label for="pc-check">
+                                        Cheque Payment
+                                        <input type="checkbox" id="pc-check">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="pc-item">
+                                    <label for="pc-paypal">
+                                        Paypal
+                                        <input type="checkbox" id="pc-paypal">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="order-btn">
+                                @{Session["Stripetotal"] = total * 100;}
+                                @if (ViewBag.check==2) {
+                                <button type="submit" class="site-btn place-btn">Place Order</button>
+                                }
+                                else if (ViewBag.check == 1) { 
+
+                                <script src="//checkout.stripe.com/v3/checkout.js"
+                                        class="stripe-button"
+                                        data-key="@ViewBag.StripePublishKey"
+                                        data-locale="auto"
+                                        data-description="Kidyx"
+                                        data-amount="@Session["Stripetotal"]; "
+                                        data-currency="pkr">
+
+                                </script>
+                                }
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+<!-- Shopping Cart Section End -->

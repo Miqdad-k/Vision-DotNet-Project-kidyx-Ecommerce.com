@@ -1,0 +1,54 @@
+﻿@model kidyx.com.Models.catagory
+
+@{
+    ViewBag.Title = "editCatagory";
+    Layout = "~/Views/Shared/dashboard.cshtml";
+}
+
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h4>Edit Catagory</h4>
+    </div>
+    <div class="card-body">
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.c_id)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.m_cId, "m_cId", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.m_cId, (IEnumerable<SelectListItem>)ViewBag.roles, "--- Select Catagory ---")
+                        @Html.ValidationMessageFor(model => model.m_cId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+
+
+

@@ -1,0 +1,420 @@
+﻿@model kidyx.com.Models.Product
+@using kidyx.com.Models
+@{
+    ViewBag.Title = "ViewProductDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script scr="@Url.Content("~/Sccripts/rating.js")"></script>
+
+@{Session["p_id"] = Model.P_id;}
+
+<section class="product-shop spad page-details">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="filter-widget">
+                    <h4 class="fw-title">Categories</h4>
+                    <ul class="filter-catagories">
+                        <li><a href="#">Men</a></li>
+                        <li><a href="#">Women</a></li>
+                        <li><a href="#">Kids</a></li>
+                    </ul>
+                </div>
+                <div class="filter-widget">
+                    <h4 class="fw-title">Brand</h4>
+                    <div class="fw-brand-check">
+                        <div class="bc-item">
+                            <label for="bc-calvin">
+                                Calvin Klein
+                                <input type="checkbox" id="bc-calvin">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class="bc-item">
+                            <label for="bc-diesel">
+                                Diesel
+                                <input type="checkbox" id="bc-diesel">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class="bc-item">
+                            <label for="bc-polo">
+                                Polo
+                                <input type="checkbox" id="bc-polo">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class="bc-item">
+                            <label for="bc-tommy">
+                                Tommy Hilfiger
+                                <input type="checkbox" id="bc-tommy">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="filter-widget">
+                    <h4 class="fw-title">Price</h4>
+                    <div class="filter-range-wrap">
+                        <div class="range-slider">
+                            <div class="price-input">
+                                <input type="text" id="minamount">
+                                <input type="text" id="maxamount">
+                            </div>
+                        </div>
+                        <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
+                             data-min="33" data-max="98">
+                            <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
+                            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
+                            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
+                        </div>
+                    </div>
+                    <a href="#" class="filter-btn">Filter</a>
+                </div>
+                <div class="filter-widget">
+                    <h4 class="fw-title">Color</h4>
+                    <div class="fw-color-choose">
+                        <div class="cs-item">
+                            <input type="radio" id="cs-black">
+                            <label class="cs-black" for="cs-black">Black</label>
+                        </div>
+                        <div class="cs-item">
+                            <input type="radio" id="cs-violet">
+                            <label class="cs-violet" for="cs-violet">Violet</label>
+                        </div>
+                        <div class="cs-item">
+                            <input type="radio" id="cs-blue">
+                            <label class="cs-blue" for="cs-blue">Blue</label>
+                        </div>
+                        <div class="cs-item">
+                            <input type="radio" id="cs-yellow">
+                            <label class="cs-yellow" for="cs-yellow">Yellow</label>
+                        </div>
+                        <div class="cs-item">
+                            <input type="radio" id="cs-red">
+                            <label class="cs-red" for="cs-red">Red</label>
+                        </div>
+                        <div class="cs-item">
+                            <input type="radio" id="cs-green">
+                            <label class="cs-green" for="cs-green">Green</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="filter-widget">
+                    <h4 class="fw-title">Size</h4>
+                    <div class="fw-size-choose">
+                        <div class="sc-item">
+                            <input type="radio" id="s-size">
+                            <label for="s-size">s</label>
+                        </div>
+                        <div class="sc-item">
+                            <input type="radio" id="m-size">
+                            <label for="m-size">m</label>
+                        </div>
+                        <div class="sc-item">
+                            <input type="radio" id="l-size">
+                            <label for="l-size">l</label>
+                        </div>
+                        <div class="sc-item">
+                            <input type="radio" id="xs-size">
+                            <label for="xs-size">xs</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="filter-widget">
+                    <h4 class="fw-title">Tags</h4>
+                    <div class="fw-tags">
+                        <a href="#">Towel</a>
+                        <a href="#">Shoes</a>
+                        <a href="#">Coat</a>
+                        <a href="#">Dresses</a>
+                        <a href="#">Trousers</a>
+                        <a href="#">Men's hats</a>
+                        <a href="#">Backpack</a>
+                    </div>
+                </div>
+            </div>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <div class="col-lg-9">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="product-pic-zoom">
+                            <img class="product-big-img" src="@Url.Content(Model.P_img1)" alt="">
+                            <div class="zoom-icon">
+                                <i class="fa fa-search-plus"></i>
+                            </div>
+                        </div>
+                        <div class="product-thumbs">
+                            <div class="product-thumbs-track ps-slider owl-carousel">
+                                <style>
+                                    .pt img {
+                                        height: 100px;
+                                        width: 90px;
+                                    }
+                                </style>
+                                @if (!Model.P_img1.IsEmpty())
+                                {
+                                    <div class="pt active" data-imgbigurl="@Url.Content(Model.P_img1)">
+                                        <img src="@Url.Content(Model.P_img1)" alt="">
+                                    </div>}
+                                @if (!Model.P_img2.IsEmpty())
+                                {
+                                    <div class="pt " data-imgbigurl="@Url.Content(Model.P_img2)">
+                                        <img src="@Url.Content(Model.P_img2)" alt="">
+                                    </div>}
+                                @if (!Model.P_img3.IsEmpty())
+                                {
+                                    <div class="pt" data-imgbigurl="@Url.Content(Model.P_img3)">
+                                        <img src="@Url.Content(Model.P_img3)" alt="">
+                                    </div>
+                                }
+                                @if (!Model.P_img4.IsEmpty())
+                                {
+                                    <div class="pt" data-imgbigurl="@Url.Content(Model.P_img4)">
+                                        <img src="@Url.Content(Model.P_img4)" alt="">
+                                    </div>
+                                }
+                                @if (!Model.P_img5.IsEmpty())
+                                {
+                                    <div class="pt" data-imgbigurl="@Url.Content(Model.P_img5)">
+                                        <img src="@Url.Content(Model.P_img5)" alt="">
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="product-details">
+                            <div class="pd-title">
+                                <span>@Model.P_brand</span>
+                                <h3>@Model.P_name</h3>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    int num = 0;
+                                    foreach (var item1 in (List<Wishlist>)Session["wishlist"])
+                                    {
+                                        if (Model.P_id == item1.productid)
+                                        {
+                                            num = 1;
+                                            <a href="@Url.Content("~/Home/Wishlistremove/"+item1.Id)" class="heart-icon" style="color:red;"><i class="fa fa-heart"></i></a>
+                                            break;
+                                        }
+
+
+                                    }
+                                    if (num == 0)
+                                    {
+                                        <a href="@Url.Content("~/Home/Wishlist/"+Model.P_id)" class="heart-icon" style="color:red;"><i class="icon_heart_alt"></i></a>
+
+
+                                    }
+                                }
+                            </div>
+                            <div class="text-warning">
+                                @for (int i = 0; i < ViewBag.tstar; i++)
+                                {<i class="fa fa-star fa-2x"></i>}
+
+
+                                <span>(@Session["count"])</span>
+                            </div>
+                            <div class="pd-desc">
+                                <p>
+                                    @Model.P_discription
+                                </p>
+                                <h4>RS @Model.P_discprice <span>@Model.P_retailprice</span></h4>
+                            </div>
+                            <div class="pd-color">
+                                <p><h6>Color :</h6>@Model.P_color</p>
+
+                            </div>
+                            @*<div class="pd-size-choose">
+                                    <div class="sc-item">
+                                        <input type="radio" id="sm-size">
+                                        <label for="sm-size">s</label>
+                                    </div>
+                                    <div class="sc-item">
+                                        <input type="radio" id="md-size">
+                                        <label for="md-size">m</label>
+                                    </div>
+                                    <div class="sc-item">
+                                        <input type="radio" id="lg-size">
+                                        <label for="lg-size">l</label>
+                                    </div>
+                                    <div class="sc-item">
+                                        <input type="radio" id="xl-size">
+                                        <label for="xl-size">xs</label>
+                                    </div>
+                                </div>*@
+                            @using (@Html.BeginForm("addtocart", "Home", new { @id = Model.P_id }, FormMethod.Post))
+                            {
+                                <div class="quantity">
+                                    <div class="pro-qty">
+                                        <input type="number" name="unit" value="1" id="qty1" min="1" max="@Model.P_quantity">
+                                    </div>
+                                    @if (Model.P_quantity != 0)
+                                    {
+                                        <button href="#" type="submit" class="primary-btn pd-cart">Add To Cart</button>}
+                                </div>}
+                            <ul class="pd-tags">
+                                <li><span>CATEGORIES</span>: @ViewBag.catname</li>
+
+                            </ul>
+                            <div class="pd-share">
+                                <div class="p-code">Sku : @Model.P_id</div>
+                                @*<div class="pd-social">
+                                        <a href="#"><i class="ti-facebook"></i></a>
+                                        <a href="#"><i class="ti-twitter-alt"></i></a>
+                                        <a href="#"><i class="ti-linkedin"></i></a>
+                                    </div>*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-tab">
+                    <div class="tab-item">
+                        <ul class="nav" role="tablist">
+                            <li>
+                                <a class="active" data-toggle="tab" href="#tab-1" role="tab">DESCRIPTION</a>
+                            </li>
+                            <li>
+                                <a data-toggle="tab" href="#tab-2" role="tab">SPECIFICATIONS</a>
+                            </li>
+                            <li>
+                                <a data-toggle="tab" href="#tab-3" role="tab">Customer Reviews </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-item-content">
+                        <div class="tab-content">
+                            <div class="tab-pane fade-in active" id="tab-1" role="tabpanel">
+                                <div class="product-content">
+                                    <div class="row">
+                                        <div class="col-lg-7">
+                                            <h5>DESCRIPTION</h5>
+                                            <p>
+                                                @Model.P_discription
+                                            </p>
+
+                                        </div>
+                                        <div class="col-lg-5">
+                                            <img src="@Model.P_img1" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab-2" role="tabpanel">
+                                <div class="specification-table">
+                                    <table>
+                                        <tr>
+                                            <td class="p-catagory">Customer Rating</td>
+                                            <td>
+                                                <div class="pd-rating">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                    <span>(5)</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-catagory">Price</td>
+                                            <td>
+                                                <div class="p-price">RS @Model.P_discprice</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-catagory">Add To Cart</td>
+                                            <td>
+                                                <div class="cart-add">+ add to cart</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-catagory">Availability</td>
+                                            <td>
+                                                <div class="p-stock">@Model.P_quantity in stock</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-catagory">Weight</td>
+                                            <td>
+                                                <div class="p-weight">1,3kg</div>
+                                            </td>
+                                        </tr>
+                                        @*<tr>
+                                                <td class="p-catagory">Size</td>
+                                                <td>
+                                                    <div class="p-size">Xxl</div>
+                                                </td>
+                                            </tr>*@
+                                        <tr>
+                                            <td class="p-catagory">Color</td>
+                                            <td><span class="cs-color"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-catagory">Sku</td>
+                                            <td>
+                                                <div class="p-code">@Model.P_id</div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab-3" role="tabpanel">
+                                <div class="customer-review-option">
+
+
+                                    @{Session["idr"] = Model.P_id; }
+
+                                    @{Html.RenderAction("DetailReview", "Products");}
+                                </div>
+
+                                @{int a = Convert.ToInt32(Session["openclose"]);}
+                                @if (a == 1)
+                                {
+                                    <div class="leave-comment">
+
+                                        @using (Html.BeginForm("Review", "Products", FormMethod.Post))
+                                        {
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h4 style="float:left;">Leave A Comment</h4>
+                                                    <div class="text-warning mb-3" style="float:right;">
+                                                        <h5>Rate :</h5>
+                                                        <i class="ratingstar fa  fa-star-o fa-2x" data-value="1"></i>
+                                                        <i class="ratingstar fa fa-star-o fa-2x" data-value="2"></i>
+                                                        <i class="ratingstar fa fa-star-o fa-2x" data-value="3"></i>
+                                                        <i class="ratingstar fa fa-star-o fa-2x" data-value="4"></i>
+                                                        <i class="ratingstar fa fa-star-o fa-2x" data-value="5"></i>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-lg-12">
+                                                    <span>
+
+
+
+                                                    </span>
+                                                    <input type="hidden" name="rt" id="ratingsvalue" />
+
+                                                    <textarea placeholder="Messages" name="message" class=""></textarea>
+                                                    <button type="submit" class="site-btn">Send message</button>
+                                                </div>
+                                            </div>
+                                        }
+
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

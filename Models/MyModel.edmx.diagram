@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="db61181cbe974cc6bff1c73e231fff85" Name="Diagram1" ZoomLevel="63">
+        <EntityTypeShape EntityType="Model.C__MigrationHistory" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AspNetRoles" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AspNetUsers" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.catagory" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__catagory__m_cId__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Model.UserProfile_details" Width="1.5" PointX="5.375" PointY="6.75" />
+        <EntityTypeShape EntityType="Model.Product" Width="1.5" PointX="3" PointY="9.75" />
+        <AssociationConnector Association="Model.FK__Product__P_cid__71D1E811" />
+        <EntityTypeShape EntityType="Model.pagedetails" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.fsection" Width="1.5" PointX="7.375" PointY="4.75" />
+        <EntityTypeShape EntityType="Model.tsection" Width="1.5" PointX="7.375" PointY="8.75" />
+        <EntityTypeShape EntityType="Model.shoporder" Width="1.5" PointX="5.25" PointY="12" />
+        <AssociationConnector Association="Model.FK__shoporder__useri__3C34F16F" />
+        <EntityTypeShape EntityType="Model.productlist" Width="1.5" PointX="7.5" PointY="12.125" />
+        <AssociationConnector Association="Model.FK__Table__product_i__3F115E1A" />
+        <AssociationConnector Association="Model.FK__Table__so_id__40058253" />
+        <EntityTypeShape EntityType="Model.thsection" Width="1.5" PointX="3" PointY="15.875" />
+        <AssociationConnector Association="Model.FK__thsection__catag__5224328E" />
+        <EntityTypeShape EntityType="Model.fosection" Width="1.5" PointX="3" PointY="19.75" />
+        <AssociationConnector Association="Model.FK__fosection__catag__625A9A57" />
+        <EntityTypeShape EntityType="Model.review" Width="1.5" PointX="7.625" PointY="16" />
+        <AssociationConnector Association="Model.FK__review__user_id__0697FACD" />
+        <EntityTypeShape EntityType="Model.fisection" Width="1.5" PointX="3" PointY="24" />
+        <AssociationConnector Association="Model.FK__fisection__catag__1B9317B3" />
+        <EntityTypeShape EntityType="Model.Wishlist" Width="1.5" PointX="9.625" PointY="8.25" />
+        <AssociationConnector Association="Model.FK__Wishlist__produc__2EA5EC27" />
+        <AssociationConnector Association="Model.FK__Wishlist__userid__2F9A1060" />
+        <EntityTypeShape EntityType="Model.contactus" Width="1.5" PointX="9.375" PointY="0.75" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

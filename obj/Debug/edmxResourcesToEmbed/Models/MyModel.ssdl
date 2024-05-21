@@ -1,0 +1,508 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ClaimType" Type="nvarchar(max)" />
+    <Property Name="ClaimValue" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserRoles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
+    <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="datetime" />
+    <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="Profile_img" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="catagory">
+    <Key>
+      <PropertyRef Name="c_id" />
+    </Key>
+    <Property Name="c_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="m_cId" Type="int" />
+    <Property Name="name" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="contactus">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="map_link" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="contact_description" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="phone" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="fisection">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="picture" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="link" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="catagoryid" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="fosection">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="picture" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="heading" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="details" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="price" Type="int" Nullable="false" />
+    <Property Name="catagory" Type="int" Nullable="false" />
+    <Property Name="link" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="fsection">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="picture" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="title" Type="varchar" MaxLength="70" Nullable="false" />
+    <Property Name="description" Type="varchar" MaxLength="200" />
+    <Property Name="tag" Type="varchar" MaxLength="50" />
+    <Property Name="tnum" Type="varchar" MaxLength="50" />
+    <Property Name="tcontrol" Type="varchar" MaxLength="5" />
+    <Property Name="cat" Type="nvarchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="pagedetails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Phonenumber" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="Facebook" Type="nvarchar(max)" />
+    <Property Name="Instagram" Type="nvarchar(max)" />
+    <Property Name="Twitter" Type="nvarchar(max)" />
+    <Property Name="Printest" Type="nvarchar(max)" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="P_id" />
+    </Key>
+    <Property Name="P_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="P_name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="P_brand" Type="varchar" MaxLength="20" />
+    <Property Name="P_retailprice" Type="int" Nullable="false" />
+    <Property Name="P_discprice" Type="int" />
+    <Property Name="P_color" Type="nvarchar" MaxLength="20" />
+    <Property Name="P_quantity" Type="int" Nullable="false" />
+    <Property Name="P_discription" Type="varchar(max)" Nullable="false" />
+    <Property Name="P_size" Type="int" Nullable="false" />
+    <Property Name="P_img1" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="P_img2" Type="nvarchar" MaxLength="500" />
+    <Property Name="P_img3" Type="nvarchar" MaxLength="500" />
+    <Property Name="P_img4" Type="nvarchar" MaxLength="500" />
+    <Property Name="P_img5" Type="nvarchar" MaxLength="500" />
+    <Property Name="P_cid" Type="int" />
+    <Property Name="P_c_id" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="productlist">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="product_id" Type="int" Nullable="false" />
+    <Property Name="quantity" Type="int" Nullable="false" />
+    <Property Name="so_id" Type="varchar" MaxLength="128" Nullable="false" />
+    <Property Name="productprice" Type="int" Nullable="false" />
+    <Property Name="productweight" Type="int" />
+  </EntityType>
+  <EntityType Name="review">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="rating" Type="int" Nullable="false" />
+    <Property Name="message" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="product_id" Type="int" Nullable="false" />
+    <Property Name="date" Type="date" />
+  </EntityType>
+  <EntityType Name="shoporder">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="varchar" MaxLength="128" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="fname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="phone" Type="nvarchar" MaxLength="13" Nullable="false" />
+    <Property Name="zipcode" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="userid" Type="nvarchar" MaxLength="128" />
+    <Property Name="bill_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="total" Type="int" Nullable="false" />
+    <Property Name="status" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="sort" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="reviewstatus" Type="int" />
+    <Property Name="amount_status" Type="varchar" MaxLength="10" />
+    <Property Name="datetime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="thsection">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="picture" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="link" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="catagoryid" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tsection">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="picture" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="link" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserProfile_details">
+    <Key>
+      <PropertyRef Name="user_id1" />
+    </Key>
+    <Property Name="user_id1" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="user_pname" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="user_fname" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="address1" Type="nvarchar" MaxLength="400" Nullable="false" />
+    <Property Name="profile_img" Type="nvarchar" MaxLength="500" />
+    <Property Name="Dob" Type="date" Nullable="false" />
+    <Property Name="phoneno" Type="varchar" MaxLength="12" />
+    <Property Name="zipcode" Type="varchar" MaxLength="8" />
+  </EntityType>
+  <EntityType Name="Wishlist">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="productid" Type="int" Nullable="false" />
+    <Property Name="productname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="productpic" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="productprice" Type="int" />
+    <Property Name="userid" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__catagory__m_cId__4F7CD00D">
+    <End Role="catagory" Type="Self.catagory" Multiplicity="0..1" />
+    <End Role="catagory1" Type="Self.catagory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="catagory">
+        <PropertyRef Name="c_id" />
+      </Principal>
+      <Dependent Role="catagory1">
+        <PropertyRef Name="m_cId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__fisection__catag__1B9317B3">
+    <End Role="catagory" Type="Self.catagory" Multiplicity="1" />
+    <End Role="fisection" Type="Self.fisection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="catagory">
+        <PropertyRef Name="c_id" />
+      </Principal>
+      <Dependent Role="fisection">
+        <PropertyRef Name="catagoryid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__fosection__catag__625A9A57">
+    <End Role="catagory" Type="Self.catagory" Multiplicity="1" />
+    <End Role="fosection" Type="Self.fosection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="catagory">
+        <PropertyRef Name="c_id" />
+      </Principal>
+      <Dependent Role="fosection">
+        <PropertyRef Name="catagory" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Product__P_cid__71D1E811">
+    <End Role="catagory" Type="Self.catagory" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="catagory">
+        <PropertyRef Name="c_id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="P_cid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__review__user_id__0697FACD">
+    <End Role="UserProfile_details" Type="Self.UserProfile_details" Multiplicity="1" />
+    <End Role="review" Type="Self.review" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserProfile_details">
+        <PropertyRef Name="user_id1" />
+      </Principal>
+      <Dependent Role="review">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__shoporder__useri__3C34F16F">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="shoporder" Type="Self.shoporder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="shoporder">
+        <PropertyRef Name="userid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Table__product_i__3F115E1A">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="productlist" Type="Self.productlist" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="P_id" />
+      </Principal>
+      <Dependent Role="productlist">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Table__so_id__40058253">
+    <End Role="shoporder" Type="Self.shoporder" Multiplicity="1" />
+    <End Role="productlist" Type="Self.productlist" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="shoporder">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="productlist">
+        <PropertyRef Name="so_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__thsection__catag__5224328E">
+    <End Role="catagory" Type="Self.catagory" Multiplicity="1" />
+    <End Role="thsection" Type="Self.thsection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="catagory">
+        <PropertyRef Name="c_id" />
+      </Principal>
+      <Dependent Role="thsection">
+        <PropertyRef Name="catagoryid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Wishlist__produc__2EA5EC27">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="Wishlist" Type="Self.Wishlist" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="P_id" />
+      </Principal>
+      <Dependent Role="Wishlist">
+        <PropertyRef Name="productid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Wishlist__userid__2F9A1060">
+    <End Role="UserProfile_details" Type="Self.UserProfile_details" Multiplicity="1" />
+    <End Role="Wishlist" Type="Self.Wishlist" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserProfile_details">
+        <PropertyRef Name="user_id1" />
+      </Principal>
+      <Dependent Role="Wishlist">
+        <PropertyRef Name="userid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+    <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="catagory" EntityType="Self.catagory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="contactus" EntityType="Self.contactus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="fisection" EntityType="Self.fisection" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="fosection" EntityType="Self.fosection" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="fsection" EntityType="Self.fsection" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pagedetails" EntityType="Self.pagedetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="productlist" EntityType="Self.productlist" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="review" EntityType="Self.review" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="shoporder" EntityType="Self.shoporder" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="thsection" EntityType="Self.thsection" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tsection" EntityType="Self.tsection" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserProfile_details" EntityType="Self.UserProfile_details" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Wishlist" EntityType="Self.Wishlist" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__catagory__m_cId__4F7CD00D" Association="Self.FK__catagory__m_cId__4F7CD00D">
+      <End Role="catagory" EntitySet="catagory" />
+      <End Role="catagory1" EntitySet="catagory" />
+    </AssociationSet>
+    <AssociationSet Name="FK__fisection__catag__1B9317B3" Association="Self.FK__fisection__catag__1B9317B3">
+      <End Role="catagory" EntitySet="catagory" />
+      <End Role="fisection" EntitySet="fisection" />
+    </AssociationSet>
+    <AssociationSet Name="FK__fosection__catag__625A9A57" Association="Self.FK__fosection__catag__625A9A57">
+      <End Role="catagory" EntitySet="catagory" />
+      <End Role="fosection" EntitySet="fosection" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Product__P_cid__71D1E811" Association="Self.FK__Product__P_cid__71D1E811">
+      <End Role="catagory" EntitySet="catagory" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK__review__user_id__0697FACD" Association="Self.FK__review__user_id__0697FACD">
+      <End Role="UserProfile_details" EntitySet="UserProfile_details" />
+      <End Role="review" EntitySet="review" />
+    </AssociationSet>
+    <AssociationSet Name="FK__shoporder__useri__3C34F16F" Association="Self.FK__shoporder__useri__3C34F16F">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="shoporder" EntitySet="shoporder" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Table__product_i__3F115E1A" Association="Self.FK__Table__product_i__3F115E1A">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="productlist" EntitySet="productlist" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Table__so_id__40058253" Association="Self.FK__Table__so_id__40058253">
+      <End Role="shoporder" EntitySet="shoporder" />
+      <End Role="productlist" EntitySet="productlist" />
+    </AssociationSet>
+    <AssociationSet Name="FK__thsection__catag__5224328E" Association="Self.FK__thsection__catag__5224328E">
+      <End Role="catagory" EntitySet="catagory" />
+      <End Role="thsection" EntitySet="thsection" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Wishlist__produc__2EA5EC27" Association="Self.FK__Wishlist__produc__2EA5EC27">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Wishlist" EntitySet="Wishlist" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Wishlist__userid__2F9A1060" Association="Self.FK__Wishlist__userid__2F9A1060">
+      <End Role="UserProfile_details" EntitySet="UserProfile_details" />
+      <End Role="Wishlist" EntitySet="Wishlist" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

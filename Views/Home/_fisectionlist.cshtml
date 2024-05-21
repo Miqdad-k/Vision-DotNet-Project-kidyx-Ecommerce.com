@@ -1,0 +1,75 @@
+﻿@using kidyx.com.Models
+@model IEnumerable<kidyx.com.Models.Product>
+<!-- Man Banner Section Begin -->
+<section class="man-banner spad">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="filter-control">
+                    <ul>
+                        <li class="active">@ViewBag.role5</li>
+                        @*<li>HandBag</li>
+                            <li>Shoes</li>
+                            <li>Accessories</li>*@
+                    </ul>
+                </div>
+                <div class="product-slider owl-carousel">
+                    @foreach (var item in Model)
+                    {
+                        if (item.catagory.name == ViewBag.role4)
+                        {
+        <div class="product-item">
+            <div class="pi-pic">
+                <img src="@Url.Content(item.P_img1)" width="150" height="300" alt="">
+                <div class="sale">Sale</div>
+                <div class="icon">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        int num = 0;
+                        foreach (var item1 in (List<Wishlist>)Session["wishlist"])
+                        {
+                            if (item.P_id == item1.productid)
+                            {
+                                num = 1;
+<a href="@Url.Content("~/Home/Wishlistremove/"+item1.Id)" style="color:red;"><i class="fa fa-heart"></i></a> break;
+                            }
+
+
+                        }
+                        if (num == 0)
+                        {
+<a href="@Url.Content("~/Home/Wishlist/"+item.P_id)" style="color:red;"><i class="icon_heart_alt"></i></a>                        }
+                    }
+                </div>
+                <ul>
+                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
+                    <li class="quick-view"><a href="@Url.Content("~/Products/ViewProductDetails/"+item.P_id)">+ Quick View</a></li>
+                    <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
+                </ul>
+            </div>
+            <div class="pi-text">
+
+                <div class="catagory-name">@item.catagory.name</div>
+                <a href="#">
+                    <h5>@item.P_name</h5>
+                </a>
+                <div class="product-price">
+                    RS @item.P_discprice
+                    <span>RS @item.P_retailprice</span>
+                </div>
+            </div>
+        </div>}
+}
+
+                </div>
+            </div>
+            <div class="col-lg-3 offset-lg-1">
+                <div class="product-large set-bg m-large" data-setbg="@Url.Content(@ViewBag.role1)">
+                    <h2>@ViewBag.role2</h2>
+                    <a href="@Url.Content(@ViewBag.role3)">Discover More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Man Banner Section End -->

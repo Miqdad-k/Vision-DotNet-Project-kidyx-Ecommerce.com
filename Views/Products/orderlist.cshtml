@@ -1,0 +1,183 @@
+﻿@model IEnumerable<kidyx.com.Models.shoporder>
+
+@{
+    ViewBag.Title = "orderlist";
+    Layout = "~/Views/Shared/dashboard.cshtml";
+}
+
+
+
+<style>
+    #myInput {
+        background-image: url('/css/searchicon.png'); /* Add a search icon to input */
+        background-position: 10px 12px; /* Position the search icon */
+        background-repeat: no-repeat; /* Do not repeat the icon image */
+        width: 100%; /* Full-width */
+        font-size: 16px; /* Increase font-size */
+        padding: 12px 20px 12px 40px; /* Add some padding */
+        border: 1px solid #ddd; /* Add a grey border */
+        margin-bottom: 12px; /* Add some space below the input */
+    }
+
+    #myTable {
+        border-collapse: collapse; /* Collapse borders */
+        width: 100%; /* Full-width */
+        border: 1px solid #ddd; /* Add a grey border */
+        font-size: 18px; /* Increase font-size */
+    }
+
+        #myTable th, #myTable td {
+            text-align: left; /* Left-align text */
+            padding: 12px; /* Add padding */
+        }
+
+        #myTable tr {
+            /* Add a bottom border to all table rows */
+            border-bottom: 1px solid #ddd;
+        }
+
+            #myTable tr.header, #myTable tr:hover {
+                /* Add a grey background color to the table header and on hover */
+                background-color: #f1f1f1;
+            }
+</style>
+<!-- Default Card Example -->
+<div class="card mb-4">
+    <div class="card-header">
+        Order List
+    </div>
+    <div class="card-body">
+        
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+        <table id="myTable" class="table">
+            <tr>
+                <th>
+                    <h5>Picture</h5>
+                </th>
+                <th>
+                    <h5>Name</h5>
+                </th>
+                <th>
+                    <h5>Email</h5>
+                </th>
+                <th>
+                    <h5>Status</h5>
+                </th>
+                <th>
+                    <h5>Total price</h5>
+                </th>
+
+                <th><h5>Settings</h5></th>
+
+            </tr>
+
+            @foreach (var item in Model)
+            {
+
+        <tr>
+            @foreach (var itemlist in item.productlist)
+            {
+
+                <td><img src="@Url.Content(itemlist.Product.P_img1)" height="50" width="50" alt="slider" /></td>
+
+            }
+            <td>
+                @item.name
+            </td>
+            <td>
+                @item.email
+            </td>
+            <td>
+                @if (item.status == "Confirmed")
+                {
+                    <p style="color:forestgreen;">@item.status </p>
+                }
+                else if (item.status == "Pending")
+                {
+                    <p style=" color: #FFC300;">@item.status </p>
+                }
+                else if (item.status == "Canceled")
+                {
+                    <p style="color:red;"><b>@item.status</b> </p>
+                }
+                else if (item.status == "Shipping")
+                {
+                    <p style=" color: #FFC300;"><b>@item.status</b> </p>
+                }
+                else if (item.status == "Delivered")
+                {
+                    <p style="color:forestgreen;"><b>@item.status</b> </p>
+                }
+            </td>
+            <td>
+                @item.total
+            </td>
+
+            <td>
+                <a href="@Url.Content("~/Products/orderdetails?id="+item.bill_id)">Details</a>
+                @if (item.status == "Pending")
+                {
+                
+
+
+
+
+                    <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#deleteModal_@item.Id">
+
+                        cancel
+                    </a>
+                }
+
+
+                <div class="modal fade" id="deleteModal_@item.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">Are you Sure !!!!</div>
+                            <div class="modal-footer">
+                                <button class="btn btn-default" type="button" data-dismiss="modal">Cancel</button>
+                                <div class="btn btn-outline-warning ">@Html.ActionLink("Cancel", "cancelorder", new { id = item.Id })</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+
+
+
+
+            }
+
+        </table>
+    </div>
+</div>
+<script>
+    function myFunction() {
+      // Declare variables
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("myTable");
+      tr = table.getElementsByTagName("tr");
+
+      // Loop through all table rows, and hide those who don't match the search query
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[1];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    }
+</script>

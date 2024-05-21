@@ -1,0 +1,18 @@
+﻿@model IEnumerable<kidyx.com.Models.UserProfile_details>
+@using Microsoft.AspNet.Identity
+
+
+ 
+@foreach (var item in Model)
+{
+    if (item.user_id1 == User.Identity.GetUserId())
+    {
+<span class="mr-2 d-none d-lg-inline text-gray-600 small">@item.user_pname @item.user_fname</span>
+        <img class="img1-profile rounded-circle"
+             src="@Url.Content(item.profile_img)" height="50" width="50"  >
+    }
+}
+
+
+
+

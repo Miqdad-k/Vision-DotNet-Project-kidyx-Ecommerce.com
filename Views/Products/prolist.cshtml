@@ -1,0 +1,9 @@
+﻿@model IEnumerable<kidyx.com.Models.catagory>
+@*paritial view of prolist*@
+    <li><a href="@Url.Content("~/Products/Shop")">ALL</a></li>
+
+@foreach (var item in Model)
+
+{
+    <li><a href="@Url.Content("~/Products/Shop?cat_id=")@item.c_id">@item.name</a></li>
+}

@@ -1,0 +1,212 @@
+﻿@model IEnumerable<kidyx.com.Models.UserProfile_details>
+@using Microsoft.AspNet.Identity
+@using kidyx.com.Models
+
+
+
+
+<!-- Header Section Begin -->
+<header class="header-section">
+    <div class="header-top">
+        <div class="container">
+            <div class="ht-left">
+                <div class="mail-service">
+                    <i class=" fa fa-envelope"></i>
+                    @Session["pEmail"]
+                </div>
+                <div class="phone-service">
+                    <i class=" fa fa-phone"></i>
+                    @Session["pPhonenumber"]
+                </div>
+            </div>
+            <div class="ht-right">
+
+                @if (Request.IsAuthenticated)
+                {
+                    foreach (var item in Model)
+                    {
+                        if (item.user_id1 == User.Identity.GetUserId())
+                        {
+                <div class="login-panel">
+                    @if (Request.IsAuthenticated)
+                    {
+                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                        {
+                @Html.AntiForgeryToken()
+
+                                                <a class="text-black-50" href="javascript:document.getElementById('logoutForm').submit()">Log off</a>}
+                                        }
+                </div>
+                <div class="login-panel">
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small " title="View Profile"> @Html.ActionLink(item.user_fname+item.user_pname, "viewProfile", "Home", new { id = item.user_id1 }, new { @class = "btn btn-sm btn-default" })</span>
+                    <img class=" rounded-circle "
+                         src="@Url.Content(item.profile_img)" height="35" width="35" style="margin-bottom:-9px; margin-top:-8px">
+                    
+                </div>
+                
+                        
+
+
+                    }
+                }
+            }
+            else
+            {
+
+                @Html.ActionLink(" Log in", "Login", "Account", routeValues: null, htmlAttributes: new { @class = "login-panel fa fa-user", id = "loginLink" })
+
+            }
+                
+                <div class="top-social">
+                    @{ 
+
+                        if (Session["pFacebook"] != null) {<a href='@Session["pFacebook"]' target="_blank"><i class="ti-facebook"></i></a>}
+                        if (Session["pTwitter"] != null){<a href='@Session["pTwitter"]' target="_blank"><i class="ti-twitter-alt"></i></a>}
+                        if (Session["pInstagram"] != null){<a href='@Session["pInstagram"]' target="_blank"><i class="ti-instagram"></i></a>}
+                        if (Session["pPrintest"] != null){<a href='@Session["pPrintest"]' target="_blank"><i class="ti-pinterest"></i></a>}
+                        }
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="inner-header">
+            <div class="row">
+                <div class="col-lg-2 col-md-2">
+                    <div class="logo">
+                        <a href="@Url.Content("~/Home/Index")">
+                            
+                            <img src="@Url.Content("~/Content/img/logo.png")" width="250">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-7 col-md-7">
+                    <div class="advanced-search">
+                        <button type="button" class="category-btn">All Categories</button>
+                        <div class="input-group">
+                            @using (Html.BeginForm("Shop", "Products", FormMethod.Get))
+                            {
+                        @Html.TextBox("seacrhing", "", new { @class = "", @placeholder = "What do you need?" })
+                                        <input type="hidden" name="cat_id" value="@Session["c"]" />
+                                                        <button type="submit"><i class="ti-search"></i></button>}
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 text-right col-md-3">
+                    <ul class="nav-right">
+                        <li class="heart-icon">
+                            <a href="#">
+                                <i class="icon_heart_alt"></i>
+                                <span>@Session["wishlistcount"]</span>
+                            </a>
+                        </li>
+                        <li class="cart-icon">
+                            <a href="#">
+                                <i class="icon_bag_alt"></i>
+                                <span>@Session["c"] </span>
+                            </a>
+                            <div class="cart-hover">
+                                <div class="select-items">
+                                    <table>
+                                        <tbody>
+
+                                            @{
+                                                int total = 0;
+                                            }
+                                            @if (Session["cart"] != null)
+                                            {
+                                                foreach (cart item in (List<cart>)Session["cart"])
+                                                {
+
+                                                    <tr>
+                                                        <td class="si-pic"><img src="@Url.Content(item.productpic)" height="40" width="40" alt=""></td>
+                                                        <td class="si-text">
+                                                            <div class="product-selected">
+                                                                @{ total = (item.productprice * item.qty) + total; }
+                                                                <p>RS @item.productprice x @item.qty</p>
+                                                                <h6>@item.productname</h6>
+                                                            </div>
+                                                        </td>
+                                                        <td class="si-close">
+                                <li><a href="@Url.Action("RemoveFromCart","Home",new {productId=item.productid})"><i class="fa fa-times"></i></a></li>
+
+                                </td>
+                                </tr>
+                            }
+                        }
+
+
+
+                                            </tbody>
+                                            </table>
+</div>
+                                <div class="select-total">
+                                    <span>total:</span>
+                                    <h5>RS @total.00</h5>
+                                </div>
+                                <div class="select-button">
+                                    <a href="@Url.Content("~/Home/Shoppingcart")" class="primary-btn view-card">VIEW CARD</a>
+                                    <a href="@Url.Content("~/Products/checkout/1")" class="primary-btn checkout-btn">CHECK OUT with card</a>
+                                    @if (User.Identity.GetUserId() != null)
+                                    {
+                                        <a href="@Url.Content("~/Products/checkout/2")" class="primary-btn checkout-btn mt-1">CHECK OUT with COD</a>
+                                    }</div>
+                            </div>
+                        </li>
+                        <li class="cart-price">RS @total.00</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="nav-item">
+        <div class="container">
+            <div class="nav-depart">
+                <div class="depart-btn">
+                    <i class="ti-menu"></i>
+                    <span>All departments</span>
+                    <ul class="depart-hover">
+                        
+                        @{Html.RenderAction("prolist", "Products"); }
+
+                    </ul>
+                </div>
+            </div>
+            <nav class="nav-menu mobile-menu">
+                <ul>
+                    <li class="active"><a href="@Url.Content("~/Home/Index")">Home</a></li>
+                    <li><a href="@Url.Content("~/Products/Shop")">Shop</a></li>
+                    <li>
+                        <a href="#">Collection</a>
+                        <ul class="dropdown">
+                            <li><a href="#">Men's</a></li>
+                            <li><a href="#">Women's</a></li>
+                            <li><a href="#">Kid's</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="./blog.html">Blog</a></li>
+                    <li><a href="@Url.Content("~/Home/ContactUs")">Contact</a></li>
+                    <li>
+                        <a href="#">Pages</a>
+                        <ul class="dropdown">
+                            <li>@{ Html.RenderAction("profileCEpartial", "Home");}</li>  
+
+                            <li><a href="./blog-details.html">Blog Details</a></li>
+                            <li><a href="@Url.Content("~/Home/shoppingcart")">Shopping Cart</a></li>
+                            <li><a href="@Url.Content("~/Products/checkout/1")">Checkout</a></li>
+                            <li><a href="./faq.html">Faq</a></li>
+
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <div id="mobile-menu-wrap"></div>
+        </div>
+    </div>
+</header>
+<!-- Header End -->
+

@@ -1,0 +1,22 @@
+﻿@model IEnumerable<kidyx.com.Models.fosection>
+<!-- Deal Of The Week Section Begin-->
+@foreach (var item in Model) {
+<section class="deal-of-week set-bg spad" data-setbg="@Url.Content(item.picture)">
+    <div class="container">
+        <div class="col-lg-6 text-center">
+            <div class="section-title">
+                <h2>@item.heading</h2>
+                <p>
+                   @item.details
+                </p>
+                <div class="product-price">
+                    RS @item.price
+                    <span>/ @item.catagory1.name</span>
+                </div>
+            </div>
+           
+            <a href="@Url.Content(item.link)" class="primary-btn">Shop Now</a>
+        </div>
+    </div>
+</section>
+<!-- Deal Of The Week Section End -->}

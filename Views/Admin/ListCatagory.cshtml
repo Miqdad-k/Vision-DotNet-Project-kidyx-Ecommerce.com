@@ -1,0 +1,164 @@
+﻿@model IEnumerable<kidyx.com.Models.catagory>
+
+@{
+    ViewBag.Title = "ListCatagory";
+    Layout = "~/Views/Shared/dashboard.cshtml";
+}
+
+<style>
+    #myInput {
+        background-image: url('/css/searchicon.png'); /* Add a search icon to input */
+        background-position: 10px 12px; /* Position the search icon */
+        background-repeat: no-repeat; /* Do not repeat the icon image */
+        width: 100%; /* Full-width */
+        font-size: 16px; /* Increase font-size */
+        padding: 12px 20px 12px 40px; /* Add some padding */
+        border: 1px solid #ddd; /* Add a grey border */
+        margin-bottom: 12px; /* Add some space below the input */
+    }
+
+    #myTable {
+        border-collapse: collapse; /* Collapse borders */
+        width: 100%; /* Full-width */
+        border: 1px solid #ddd; /* Add a grey border */
+        font-size: 18px; /* Increase font-size */
+    }
+
+        #myTable th, #myTable td {
+            text-align: left; /* Left-align text */
+            padding: 12px; /* Add padding */
+        }
+
+        #myTable tr {
+            /* Add a bottom border to all table rows */
+            border-bottom: 1px solid #ddd;
+        }
+
+            #myTable tr.header, #myTable tr:hover {
+                /* Add a grey background color to the table header and on hover */
+                background-color: #f1f1f1;
+            }
+</style>
+<!-- Default Card Example -->
+<div class="card mb-4">
+    <div class="card-header">
+        List Of Catagorys
+    </div>
+    <div class="card-body">
+        <p style="float:right;">
+            @Html.ActionLink("Create New", "CreateCatagory")
+        </p>
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+        <table id="myTable" class="table">
+            <tr>
+                <th>
+                    <h5>Catagory ID</h5>
+                </th>
+                <th>
+                    <h5>Catagory Name</h5>
+                </th>
+
+                <th>
+                    <h5>Main Catagory</h5>
+                </th>
+                <th><h5>Settings</h5></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <div class="ml-5">  @Html.DisplayFor(modelItem => item.c_id)</div>
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.name)
+                    </td>
+
+                    <td>
+
+                        @foreach (var item1 in Model)
+                        {
+                            if (item1.c_id == item.m_cId)
+                            {
+                                <div class="ml-5">  @Html.DisplayFor(modelItem => item1.name) </div>
+                            }
+                        }
+                    </td>
+                    <td>
+
+
+                        <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#deleteModal_@item.c_id">
+
+                            Delete
+                        </a>
+                        @Html.ActionLink("Edit", "editCatagory", new { id = item.c_id })
+                        
+                        
+                        <div class="modal fade" id="deleteModal_@item.c_id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">Are you Sure !!!!</div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-default" type="button" data-dismiss="modal">Cancel</button>
+                                        <div class="btn btn-outline-warning ">@Html.ActionLink("Delete", "deleteCatagory", new { id = item.c_id })</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+
+
+                
+
+
+
+
+            }
+
+        </table>
+    </div>
+</div>
+<script>
+    function myFunction() {
+      // Declare variables
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("myTable");
+      tr = table.getElementsByTagName("tr");
+
+      // Loop through all table rows, and hide those who don't match the search query
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[1];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+

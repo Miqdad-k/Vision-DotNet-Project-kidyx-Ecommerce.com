@@ -1,0 +1,54 @@
+﻿@model kidyx.com.Models.ExternalLoginListViewModel
+@using Microsoft.Owin.Security
+@{
+    var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+    if (loginProviders.Count() == 0)
+    {
+
+    }
+    else
+    {
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+        using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = Model.ReturnUrl }))
+        {
+            @Html.AntiForgeryToken()
+            <div id="socialLoginList" class="row">
+                <p>
+                    @foreach (AuthenticationDescription p in loginProviders)
+                    {
+
+                        if (@p.Caption == "Facebook")
+                        {
+                            <style>
+                                .abc {
+                                    width: 80%;
+                                }
+                                .sd{
+                                   
+                                }
+                            </style>
+                            <div class="col-md-6 ">
+
+                                <button type="submit" class="btn btn-primary abc" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account"><i class="fab fa-facebook"></i>      @p.AuthenticationType</button>
+                            </div>
+                        }
+                        else if (@p.Caption == "Google") 
+                        {
+                            <style>
+                                .btn1 {
+                                }
+                            </style>
+                            <style>
+                                .abc {
+                                    width: 80%;
+                                }
+                            </style>
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-danger abc" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account"><i class="fab fa-google"></i> @p.AuthenticationType</button>
+                            </div>}
+                    }
+                </p>
+            </div>
+        }
+    }
+}

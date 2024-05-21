@@ -1,0 +1,98 @@
+﻿@using kidyx.com.Models
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Shoppingcart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Breadcrumb Section Begin -->
+<div class="breacrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-text product-more">
+                    <a href="./home.html"><i class="fa fa-home"></i> Home</a>
+                    <a href="./shop.html">Shop</a>
+                    <span>Shopping Cart</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb Section Begin -->
+<!-- Shopping Cart Section Begin -->
+<section class="shopping-cart spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="cart-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th class="p-name">Product Name</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th><i class="ti-close"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{ int count = 0;}
+                            @if (Session["cart"] != null)
+                            {
+                                foreach (cart item in (List<cart>)Session["cart"])
+                                {
+                                    <tr>
+                                        <td class="cart-pic first-row"><img src="@Url.Content(item.productpic)" width="100" height="100" alt=""></td>
+                                        <td class="cart-title first-row">
+                                            <h5>@item.productname</h5>
+                                        </td>
+                                        <td class="p-price first-row">RS @item.productprice</td>
+                                        <td class="qua-col first-row">
+                                            <div class="quantity">
+                                                <div class="">
+                                                    <p>@item.qty</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        @{int a = item.productprice * item.qty; }
+                                        <td class="total-price first-row">RS @a</td>
+                                        @{count = count + a; }
+                                        <td class="close-td first-row"> <a href="@Url.Action("RemoveFromCart","Home",new {productId=item.productid}) " style="color:black;"> <i class="ti-close"></i></a></td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="cart-buttons">
+                            <a href="@Url.Content("~/Products/Shop")" class="primary-btn continue-shop">Continue shopping</a>
+
+                        </div>
+                        <div class="discount-coupon">
+                            <h6>Discount Codes</h6>
+                            <form action="#" class="coupon-form">
+                                <input type="text" placeholder="Enter your codes">
+                                <button type="submit" class="site-btn coupon-btn">Apply</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 offset-lg-4">
+                        <div class="proceed-checkout">
+                            <ul>
+                                <li class="subtotal">Subtotal <span>RS @count</span></li>
+                                <li class="cart-total">Total <span>Rs @count</span></li>
+                            </ul>
+                            <a href="@Url.Content("~/Products/checkout/1")" class="proceed-btn">PROCEED TO CHECK OUT with card</a>
+                            @if (User.Identity.GetUserId() != null) { 
+                                <a href="@Url.Content("~/Products/checkout/2")" class="proceed-btn mt-1">PROCEED TO CHECK OUT with Cod</a>
+                            }</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

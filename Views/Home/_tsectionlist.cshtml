@@ -1,0 +1,26 @@
+﻿@model IEnumerable<kidyx.com.Models.tsection>
+
+
+<!-- Banner Section Begin -->
+<div class="banner-section spad">
+    <div class="container-fluid">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-4">
+                    <a href="@item.link">
+
+                        <div class="single-banner">
+                            <img src="@Url.Content(item.picture)" alt="">
+                            <div class="inner-text">
+                                <h4>@item.name</h4>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+
+            </div>
+    </div>
+</div>
+<!-- Banner Section End -->

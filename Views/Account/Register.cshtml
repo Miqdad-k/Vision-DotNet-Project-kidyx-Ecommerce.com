@@ -1,0 +1,65 @@
+﻿@model kidyx.com.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+
+
+
+<!-- Register Section Begin -->
+<div class="register-login-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3">
+                <div class="register-form">
+                    <h2>Register</h2>
+                    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        <div class="form-group">
+                            <label for="username">Email address *</label>
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="form-group">
+                            <label for="pass">Password *</label>
+                            <div class="col-md-10">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="con-pass">Confirm Password *</label>
+                            <div class="col-md-10">
+                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" class="site-btn register-btn" value="REGISTER" />
+                            </div>
+                        </div>
+                    }
+                <div class="switch-login ">
+
+                    @Html.ActionLink("Or login", "Login", null, new { @class = " or-login" })
+
+
+
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Register Form Section End -->
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

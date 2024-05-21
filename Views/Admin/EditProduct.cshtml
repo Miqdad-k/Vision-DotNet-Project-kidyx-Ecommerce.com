@@ -1,0 +1,151 @@
+﻿@model kidyx.com.Models.Product
+
+@{
+    ViewBag.Title = "EditProduct";
+    Layout = "~/Views/Shared/dashboard.cshtml";
+}
+
+<!-- Default Card Example -->
+<div class="card mb-4">
+    <div class="card-header">
+        Edit Product
+    </div>
+    <div class="card-body">
+
+        @using (Html.BeginForm("EditProduct", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+
+        {
+            @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.P_id)
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-2">
+                        @Html.DisplayName("Product Name")
+                    </div>
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.P_name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.P_name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-2">
+                        @Html.DisplayName("Product Brand")
+                    </div>
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.P_brand, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.P_brand, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-1">
+                    @Html.DisplayName("Price")
+                </div>
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.P_retailprice, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.P_retailprice, "", new { @class = "text-danger" })
+                </div>
+
+
+
+                <div class="mr-2">
+                    @Html.DisplayName("Sale Price")
+                </div>
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.P_discprice, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.P_discprice, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-md-1">
+                    @Html.DisplayName("Unit")
+                </div>
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.P_quantity, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.P_quantity, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-2"></div>
+                <div class="col-md-1">
+                    @Html.DisplayName("Color")
+                </div>
+
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.P_color, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.P_color, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-md-1">
+                    @Html.DisplayName("Size")
+                </div>
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.P_size, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.P_size, "", new { @class = "text-danger" })
+                </div>
+
+
+            </div>
+
+            <div class="row mt-4">
+
+                <div class="col-md-2">
+                    @Html.DisplayName("Description")
+                </div>
+
+                <div class="col-md-9">
+                    @Html.TextAreaFor(model => model.P_discription, new { htmlAttributes = new { @class = "form-control " }, rows = "6", cols = "80" })
+                    @Html.ValidationMessageFor(model => model.P_discription, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-md-2"></div>
+                <div class="col-md-1">Picture</div>
+
+                <div class="col-md-3">
+                    <input type="file" name="file" multiple />
+                    @Html.ValidationMessageFor(model => model.P_img1, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-2">Catagory</div>
+
+                <div class="col-md-3">
+                    @Html.DropDownListFor(model => model.P_c_id, (IEnumerable<SelectListItem>)ViewBag.pcat, "---Select the Catagory---")
+
+                    @Html.ValidationMessageFor(model => model.P_cid, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+            <div class="row ">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">(ps : only new pic will save old will be deleted)</div>
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <div class="form-group">
+                <div style="float:right;">
+                    <input type="submit" value="EDIT" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+        }
+
+    </div>
+</div>
+

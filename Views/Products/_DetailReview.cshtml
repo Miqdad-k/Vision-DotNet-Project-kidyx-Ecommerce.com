@@ -1,0 +1,29 @@
+﻿@model IEnumerable<kidyx.com.Models.review>
+<h4>@Session["count"] Reviews</h4>
+
+    <div class="comment-option">
+        @foreach (var item in Model)
+        {
+            <div class="co-item">
+                <div class="avatar-pic">
+                    <img src="@Url.Content(item.UserProfile_details.profile_img) " alt="">
+                </div>
+
+                <div class="avatar-text">
+                    <div class="at-rating">
+                        @for (int i = 0; i < item.rating; i++)
+                        {
+                            <i class="fa fa-star"></i>
+                        }
+                        @for (int i = item.rating; i < 5; i++)
+                        {
+                            <i class="fa fa-star-o"></i>
+                        }
+                    </div>
+                    <h5>@item.UserProfile_details.user_pname <span>@item.date</span></h5>
+                    <div class="at-reply">@item.message</div>
+                </div>
+            </div>
+        }
+
+

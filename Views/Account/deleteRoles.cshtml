@@ -1,0 +1,43 @@
+﻿@model kidyx.com.Models.RegisterViewModel
+
+@{
+    ViewBag.Title = "RegisterRoles";
+    Layout = "~/Views/Shared/dashboard.cshtml";
+}
+
+<h2>DeleteRoles</h2>
+
+@using (Html.BeginForm("deleteRoles", "Account", FormMethod.Post, new { @class = "form horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+
+    <h4></h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+
+        <div class="col-md-10">
+            @Html.DropDownList("Name")
+
+        </div>
+    </div>
+
+    <div class="form-group">
+
+        <div class="col-md-10">
+            @Html.DropDownList("UserName")
+
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="dete" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>@ViewBag.Title </title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="@Url.Content("~/Content/frontendcss/css/bootstrap.min.css")" type="text/css">
+    <link rel="stylesheet" href="@Url.Content("~/Content/frontendcss/css/font-awesome.min.css")" type="text/css">
+    <link rel="stylesheet" href="@Url.Content("~/Content/frontendcss/css/themify-icons.css")" type="text/css">
+    <link rel="stylesheet" href="@Url.Content("~/Content/frontendcss/css/elegant-icons.css")" type="text/css">
+    <link rel="stylesheet" href="@Url.Content("~/Content/frontendcss/css/owl.carousel.min.css")" type="text/css">
+    <link rel="stylesheet" href="@Url.Content("~/Content/frontendcss/css/nice-select.css")" type="text/css">
+    <link rel="stylesheet" href="@Url.Content("~/Content/frontendcss/css/jquery-ui.min.css")" type="text/css">
+    <link rel="stylesheet" href="@Url.Content("~/Content/frontendcss/css/slicknav.min.css")" type="text/css">
+    <link rel="stylesheet" href="@Url.Content("~/Content/frontendcss/css/style.css")" type="text/css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <style>
+    </style>
+</head>
+<body style="padding-top:0px;">
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+    <!--start header-->
+    @{ Html.RenderAction("headerpartial", "Home");}
+    <!--end header-->
+    <div class="container-fluid body-content p-0">
+        @RenderBody()
+
+
+    </div>
+    @Html.Partial("_FooterPartial")
+
+    @RenderSection("scripts", required: false)
+    <!-- Js Plugins -->
+    <script src="@Url.Content("~/Scripts/frontend/js/jquery-3.3.1.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/frontend/js/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/frontend/js/jquery-ui.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/frontend/js/jquery.countdown.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/frontend/js/jquery.nice-select.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/frontend/js/jquery.zoom.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/frontend/js/jquery.dd.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/frontend/js/jquery.slicknav.js")"></script>
+    <script src="@Url.Content("~/Scripts/frontend/js/owl.carousel.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/frontend/js/main.js")"></script>
+    <script>
+        $(".ratingstar").click(function () {
+            $(".ratingstar").addClass("fa-star-o").removeClass("fa-star");
+            $(this).addClass("fa-star").removeClass("fa-star-o");
+            $(this).prevAll(".ratingstar").addClass("fa-star").removeClass("fa-star-o");
+        });
+        $(".ratingstar").click(function () {
+            debugger;
+            var starvalue = $(this).attr("data-value");
+            $("#ratingsvalue").val(starvalue);
+        });
+        var rangeSlider = $(".price-range"),            minamount = $("#minamount"),            maxamount = $("#maxamount"),            minPrice = rangeSlider.data('min'),            maxPrice = rangeSlider.data('max');        rangeSlider.slider({            range: true,            min: minPrice,            max: maxPrice,            values: [minPrice, maxPrice],            slide: function (event, ui) {                minamount.val(ui.values[0]);                maxamount.val(ui.values[1]);            }        });        minamount.val(rangeSlider.slider("values", 0));        maxamount.val(rangeSlider.slider("values", 1));
+
+    </script>
+</body>
+</html>
